@@ -1,5 +1,6 @@
 package com.leporonitech.api;
 
+import com.leporonitech.api.application.AskChampionUseCase;
 import com.leporonitech.api.application.ListChampionsUseCase;
 import com.leporonitech.api.domain.ports.ChampionsRepository;
 import org.springframework.boot.SpringApplication;
@@ -16,5 +17,10 @@ public class Application {
     @Bean
     public ListChampionsUseCase provideListChampionsUseCase(ChampionsRepository repository) {
         return new ListChampionsUseCase(repository);
+    }
+
+    @Bean
+    public AskChampionUseCase provideAskChampionUseCase(ChampionsRepository repository) {
+        return new AskChampionUseCase(repository);
     }
 }
