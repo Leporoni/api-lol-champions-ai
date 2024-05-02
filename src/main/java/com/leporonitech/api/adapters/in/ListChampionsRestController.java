@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Tag(name = "Campeões", description = "Endpoints do domínio de Campeões do LOL.")
+@Tag(name = "Champions", description = "LOL Champions domain endpoints.")
 @RestController
 @RequestMapping("/champions")
 public record ListChampionsRestController(ListChampionsUseCase useCase) {

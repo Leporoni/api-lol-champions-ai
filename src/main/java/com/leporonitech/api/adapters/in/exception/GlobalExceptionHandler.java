@@ -21,7 +21,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiError> handleDomainException(Exception unexpectedError) {
-        String message = "Ops! Ocorreu um erro inesperado!";
+        String message = "Oops! An unexpected error has occurred!";
         logger.error(message, unexpectedError);
         return ResponseEntity
                 .internalServerError()

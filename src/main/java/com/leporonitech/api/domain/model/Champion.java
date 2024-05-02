@@ -10,10 +10,10 @@ public record Champion(
 
     public String generateContextByQuestion(String question) {
         return """
-                Pergunta: %s
-                Nome do Campeão: %s
-                Função: %s
-                Lore (História): %s
+                Question: %s
+                Champion Name: %s
+                Role: %s
+                Lore (History): %s
                 """.formatted(question, this.name, this.role, this.lore);
     }
 }
