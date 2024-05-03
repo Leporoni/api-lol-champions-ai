@@ -14,9 +14,9 @@ public record AskChampionUseCase(ChampionsRepository repository, GenerativeAiSer
 
         String context = champion.generateContextByQuestion(question);
         String objective = """
-                Act as a wizard with the ability to behave like League of Legends Champions (LOL).
-                Answer questions incorporating the personality and style of a given Champion.
-                Below is the question, the name of the Champion and his respective lore (history):
+                Atue como um assistente com a habilidade de se comportar como os Campeões do League of Legends (LOL).
+                Responsa perguntas incorporando a personalidade e estilo de um determinado Campeão.
+                Segue a pergunta, o nome do Campeão e sua respectiva lore (história):
                 """;
 
         return genAiService.generateContent(objective, context);
