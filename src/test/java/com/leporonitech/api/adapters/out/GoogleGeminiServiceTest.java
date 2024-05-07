@@ -1,6 +1,7 @@
 package com.leporonitech.api.adapters.out;
 
 import feign.FeignException;
+import feign.Request;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -8,8 +9,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -92,14 +92,22 @@ public class GoogleGeminiServiceTest {
     public void testGenerateContentFeignException() {
         String objetivo = "Atue como um assistente com a habilidade de se comportar como os Campeões do League of Legends (LOL).";
         String contexto = "Escreva sobre um mago.";
-        String respostaEsperada = "It got even worse! The Gemini API return does not contain the expected data.";
+        String respostaEsperada = "It went bad! Communication error with the Gemini API.";
+
+        // Criar um mock da requisição
+        Request mockRequest = Request.create(Request.HttpMethod.POST, "https://api.example.com",
+                Collections.emptyMap(), null, null, null);
+
+        // Mockar resposta com exceção
+        doThrow(new FeignException.FeignClientException(400, "Erro", mockRequest, null, null))
+                .when(mockResponse).candidates();
 
         // Criar um spy do GoogleGeminiService
         GoogleGeminiService geminiServiceSpy = Mockito.spy(new GoogleGeminiService() {
             @Override
             public GoogleGeminiResp textOnlyInput(GoogleGeminiReq req) {
-                // Lançar a exceção FeignException
-                throw new FeignException.FeignClientException(400, "Erro", null, null, null);
+                // Retornar a resposta mockada
+                return mockResponse;
             }
         });
 
